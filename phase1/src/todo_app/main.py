@@ -82,6 +82,7 @@ def cmd_list(args: argparse.Namespace) -> None:
 
     table = format_table(headers, rows)
     print(table)
+    print("\nData stored at: ~/.todo/tasks.json")
 
 
 def cmd_complete(args: argparse.Namespace) -> None:
