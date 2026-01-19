@@ -195,16 +195,6 @@ hackathon2/
 
 ---
 
-## Scoring
-
-| Phase | Description | Points | Due Date |
-|-------|-------------|--------|----------|
-| Phase I | CLI Foundation | 100 | Dec 7, 2025 |
-| Phase II | Web Application | 150 | Dec 14, 2025 |
-| Phase III | AI Chatbot | 200 | Dec 21, 2025 |
-| Phase IV | Local K8s | 250 | Jan 4, 2026 |
-| Phase V | Cloud Deployment | 300 | Jan 18, 2026 |
-| **TOTAL** | **All Phases** | **1,000** | |
 
 ### Bonus Opportunities
 - Reusable Intelligence (Claude Subagents): +200 pts
