@@ -1,0 +1,147 @@
+# [Task]: T-006
+# [From]: plan.md §5.2: Deployment
+# [Reference]: Constitution §VI (No hardcoded secrets)
+
+# ============================================================
+# ENVIRONMENT & SECRETS (CRITICAL - Never commit)
+# ============================================================
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.test.local
+
+# ============================================================
+# BACKEND - Python
+# ============================================================
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Distribution / packaging
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ============================================================
+# FRONTEND - Node.js/JavaScript
+# ============================================================
+# Node modules
+node_modules/
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Production
+*.min.js
+*.min.css
+
+# Testing
+.nyc_output/
+coverage/
+jest-coverage/
+
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ============================================================
+# IDEs & EDITORS
+# ============================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+.vim/
+.emacs.d/
+*.swp
+*.swo
+*~
+
+# ============================================================
+# OS-SPECIFIC
+# ============================================================
+.DS_Store
+Thumbs.db
+*.lnk
+ehthumbs.db
+desktop.ini
+
+# ============================================================
+# LOGS & TEMPORARY FILES
+# ============================================================
+*.log
+*.logs
+tmp/
+temp/
+*.tmp
+*.bak
+*.backup
+*.cache
+
+# ============================================================
+# DOCKER
+# ============================================================
+docker-compose.override.yml
+.dockerignore
+
+# ============================================================
+# MISC
+# ============================================================
+.turbo/
+.env*.local
+!.env.example
