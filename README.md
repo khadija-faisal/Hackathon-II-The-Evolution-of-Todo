@@ -195,6 +195,7 @@ hackathon2/
 
 ---
 
+<<<<<<< HEAD
 ## Scoring
 
 | Phase | Description | Points | Due Date |
@@ -205,6 +206,8 @@ hackathon2/
 | Phase IV | Local K8s | 250 | Jan 4, 2026 |
 | Phase V | Cloud Deployment | 300 | Jan 18, 2026 |
 | **TOTAL** | **All Phases** | **1,000** | |
+=======
+>>>>>>> origin/main
 
 ### Bonus Opportunities
 - Reusable Intelligence (Claude Subagents): +200 pts
