@@ -459,15 +459,15 @@ Copy and track progress:
 
 ```
 ## Phase 1 (Setup)
-- [ ] T-001 FastAPI backend structure
-- [ ] T-002 Next.js frontend structure
-- [ ] T-003 .env.example template
-- [ ] T-004 FastAPI CORS configuration
-- [ ] T-005 backend/config.py settings
-- [ ] T-006 .gitignore configuration
+- [x] T-001 FastAPI backend structure
+- [x] T-002 Next.js frontend structure
+- [x] T-003 .env.example template
+- [x] T-004 FastAPI CORS configuration
+- [x] T-005 backend/config.py settings
+- [x] T-006 .gitignore configuration
 
 ## Phase 2 (Foundation) - BLOCKING
-- [ ] T-007 SQLAlchemy session factory
+- [x] T-007 SQLAlchemy session factory
 - [ ] T-008 User model (SQLModel)
 - [ ] T-009 Task model (SQLModel)
 - [ ] T-010 Composite index setup
