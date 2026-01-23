@@ -8,6 +8,7 @@ from contextlib import asynccontextmanager
 from backend.config import settings
 from backend.db import engine
 from backend.models import user, task
+from backend.middleware.jwt import jwt_middleware
 from sqlmodel import SQLModel
 
 # Create tables on startup (idempotent)
@@ -33,6 +34,9 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Configure JWT middleware (added before CORS to process auth first)
+app.middleware("http")(jwt_middleware)
+
 # Configure CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -48,10 +52,10 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "ok", "version": "1.0.0"}
 
-# Include API routes (to be implemented in Phase 2-3)
-# from backend.routes import auth, tasks
-# app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
-# app.include_router(tasks.router, prefix="/api/v1/tasks", tags=["tasks"])
+# Include API routes (Phase 2-3)
+# from backend.routes import auth  # TODO: T-035+ (auth endpoints)
+from backend.routes.tasks import router as tasks_router
+app.include_router(tasks_router, prefix="/api/v1/tasks", tags=["tasks"])
 
 if __name__ == "__main__":
     import uvicorn

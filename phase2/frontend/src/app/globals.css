@@ -123,3 +123,75 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* [Task]: T-062
+ * [From]: pages.md §Animations Table, tasks.md §T-062
+ * [Reference]: Constitution §III (Frontend Polish)
+ *
+ * Global animations for UI interactions:
+ * - Checkbox toggle (200ms bounce + fade)
+ * - Task creation (300ms slide in)
+ * - Task deletion (200ms fade out)
+ * - Button hover (100ms shadow increase)
+ * - Error message (150ms fade in, 200ms fade out)
+ */
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@layer utilities {
+  .animate-slideInUp {
+    animation: slideInUp 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-bounce-sm {
+    animation: bounce 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .transition-shadow-md {
+    transition: box-shadow 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}

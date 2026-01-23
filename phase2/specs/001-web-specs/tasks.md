@@ -468,66 +468,66 @@ Copy and track progress:
 
 ## Phase 2 (Foundation) - BLOCKING
 - [x] T-007 SQLAlchemy session factory
-- [ ] T-008 User model (SQLModel)
-- [ ] T-009 Task model (SQLModel)
-- [ ] T-010 Composite index setup
-- [ ] T-011 Database initialization on startup
-- [ ] T-012 JWT middleware
-- [ ] T-012.1 JWT Security Test (SC-002 validation)
-- [ ] T-013 Auth schemas
-- [ ] T-014 Task schemas
-- [ ] T-015 Response models
-- [ ] T-016 Error handling utilities
-- [ ] T-017 Password hashing utilities
-- [ ] T-018 Better Auth integration (frontend)
-- [ ] T-019 API client with Bearer token
-- [ ] T-020 TypeScript types
-- [ ] T-021 Next.js middleware (route protection)
+- [x] T-008 User model (SQLModel)
+- [x] T-009 Task model (SQLModel)
+- [x] T-010 Composite index setup
+- [x] T-011 Database initialization on startup
+- [x] T-012 JWT middleware
+- [x] T-012.1 JWT Security Test (SC-002 validation)
+- [x] T-013 Auth schemas
+- [x] T-014 Task schemas
+- [x] T-015 Response models
+- [x] T-016 Error handling utilities
+- [x] T-017 Password hashing utilities
+- [x] T-018 Better Auth integration (frontend)
+- [x] T-019 API client with Bearer token
+- [x] T-020 TypeScript types
+- [x] T-021 Next.js middleware (route protection)
 
 ## Phase 3 (Backend CRUD)
-- [ ] T-022 create_task service
-- [ ] T-023 get_user_tasks service
-- [ ] T-024 get_task_by_id service
-- [ ] T-025 update_task service
-- [ ] T-026 delete_task service
-- [ ] T-027 POST /api/v1/tasks endpoint
-- [ ] T-028 GET /api/v1/tasks endpoint
-- [ ] T-029 GET /api/v1/tasks/{id} endpoint
-- [ ] T-030 PUT /api/v1/tasks/{id} endpoint
-- [ ] T-031 PATCH /api/v1/tasks/{id} endpoint
-- [ ] T-032 PATCH /api/v1/tasks/{id}/complete endpoint
-- [ ] T-033 DELETE /api/v1/tasks/{id} endpoint
-- [ ] T-034 Error handling in endpoints
+- [x] T-022 create_task service
+- [x] T-023 get_user_tasks service
+- [x] T-024 get_task_by_id service
+- [x] T-025 update_task service
+- [x] T-026 delete_task service
+- [x] T-027 POST /api/v1/tasks endpoint
+- [x] T-028 GET /api/v1/tasks endpoint
+- [x] T-029 GET /api/v1/tasks/{id} endpoint
+- [x] T-030 PUT /api/v1/tasks/{id} endpoint
+- [x] T-031 PATCH /api/v1/tasks/{id} endpoint
+- [x] T-032 PATCH /api/v1/tasks/{id}/complete endpoint
+- [x] T-033 DELETE /api/v1/tasks/{id} endpoint
+- [x] T-034 Error handling in endpoints
 
 ## Phase 4 (Frontend UI)
-- [ ] T-035 Login page (Server Component)
-- [ ] T-036 LoginForm component
-- [ ] T-037 Form validation
-- [ ] T-038 Login API integration
-- [ ] T-038.1 AuthProvider/Context (JWT + user state management)
-- [ ] T-039 LoginForm accessibility
+- [x] T-035 Login page (Server Component)
+- [x] T-036 LoginForm component
+- [x] T-037 Form validation
+- [x] T-038 Login API integration
+- [x] T-038.1 AuthProvider/Context (JWT + user state management)
+- [x] T-039 LoginForm accessibility
 - [ ] T-040 Register page (optional for MVP)
 - [ ] T-041 RegisterForm component (optional)
-- [ ] T-042 Dashboard page (Server Component)
-- [ ] T-043 Header component
-- [ ] T-044 TaskList component
-- [ ] T-045 TaskCard component
-- [ ] T-046 Checkbox toggle (completion)
-- [ ] T-047 Delete confirmation & action
-- [ ] T-048 Dashboard styling (Tailwind)
-- [ ] T-049 Logout button & confirmation
-- [ ] T-050 TaskList accessibility
-- [ ] T-051 Task create page
-- [ ] T-052 Task edit page
-- [ ] T-053 TaskForm component
-- [ ] T-054 Form validation
-- [ ] T-055 Create task flow
-- [ ] T-056 Edit task flow
-- [ ] T-057 Unsaved changes detection
-- [ ] T-058 TaskForm styling
-- [ ] T-059 TaskForm accessibility
-- [ ] T-060 Root layout
-- [ ] T-061 Home page
-- [ ] T-062 Animations (polish)
-- [ ] T-063 Error boundary component
+- [x] T-042 Dashboard page (Server Component)
+- [x] T-043 Header component
+- [x] T-044 TaskList component
+- [x] T-045 TaskCard component
+- [x] T-046 Checkbox toggle (completion)
+- [x] T-047 Delete confirmation & action
+- [x] T-048 Dashboard styling (Tailwind)
+- [x] T-049 Logout button & confirmation
+- [x] T-050 TaskList accessibility
+- [x] T-051 Task create page
+- [x] T-052 Task edit page
+- [x] T-053 TaskForm component
+- [x] T-054 Form validation
+- [x] T-055 Create task flow
+- [x] T-056 Edit task flow
+- [x] T-057 Unsaved changes detection
+- [x] T-058 TaskForm styling
+- [x] T-059 TaskForm accessibility
+- [x] T-060 Root layout
+- [x] T-061 Home page
+- [x] T-062 Animations (polish)
+- [x] T-063 Error boundary component
 ```
