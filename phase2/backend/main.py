@@ -9,6 +9,7 @@ from backend.config import settings
 from backend.db import engine
 from backend.models import user, task
 from backend.middleware.jwt import jwt_middleware
+from backend.routes import auth, tasks
 from sqlmodel import SQLModel
 
 # Create tables on startup (idempotent)
@@ -52,9 +53,14 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "ok", "version": "1.0.0"}
 
-# Include API routes (Phase 2-3)
-# from backend.routes import auth  # TODO: T-035+ (auth endpoints)
+# Include API routes
+from backend.routes.auth import router as auth_router
 from backend.routes.tasks import router as tasks_router
+
+# Auth routes (login, register)
+app.include_router(auth_router)
+
+# Task CRUD routes
 app.include_router(tasks_router, prefix="/api/v1/tasks", tags=["tasks"])
 
 if __name__ == "__main__":

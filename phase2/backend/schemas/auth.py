@@ -2,10 +2,51 @@
 # [From]: rest-endpoints.md §Pydantic Models, §POST /api/v1/auth/login, §POST /api/v1/auth/register
 # [Reference]: FR-001, FR-014, Constitution §VII (Type Safety & Validation)
 
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from uuid import UUID
 from datetime import datetime
 from typing import Optional
+
+
+class UserResponse(BaseModel):
+    """API response model for user data (excludes password_hash)
+
+    Usage: Returned by login, register, and user info endpoints
+    Security: password_hash is intentionally excluded from this model
+    """
+
+    id: UUID = Field(description="User ID")
+    email: str = Field(description="User email address")
+    created_at: datetime = Field(description="Account creation timestamp")
+    updated_at: Optional[datetime] = Field(
+        default=None,
+        description="Last update timestamp"
+    )
+
+
+class AuthResponse(BaseModel):
+    """API response model for successful authentication
+
+    Usage: Returned by login and register endpoints
+    Contains:
+    - access_token: JWT token for subsequent API requests
+    - token_type: Always "Bearer" (RFC 6750 standard)
+    - user: UserResponse (no password_hash)
+    - expires_in: Token expiration time in seconds (optional)
+
+    Security:
+    - access_token is HS256-signed JWT with user_id in 'sub' claim
+    - Token includes expiration (exp claim set to iat + JWT_EXPIRATION_HOURS)
+    - Frontend stores token securely (httpOnly cookie or secure storage)
+    """
+
+    access_token: str = Field(description="JWT Bearer token for API requests")
+    token_type: str = Field(default="Bearer", description="Token type (always Bearer)")
+    user: UserResponse = Field(description="Authenticated user details")
+    expires_in: Optional[int] = Field(
+        default=None,
+        description="Token expiration time in seconds"
+    )
 
 
 class LoginRequest(BaseModel):
@@ -42,44 +83,3 @@ class RegisterRequest(BaseModel):
 
     email: EmailStr = Field(description="New user email address")
     password: str = Field(min_length=1, description="New user password (plaintext)")
-
-
-class AuthResponse(BaseModel):
-    """API response model for successful authentication
-
-    Usage: Returned by login and register endpoints
-    Contains:
-    - access_token: JWT token for subsequent API requests
-    - token_type: Always "Bearer" (RFC 6750 standard)
-    - user: UserResponse (no password_hash)
-    - expires_in: Token expiration time in seconds (optional)
-
-    Security:
-    - access_token is HS256-signed JWT with user_id in 'sub' claim
-    - Token includes expiration (exp claim set to iat + JWT_EXPIRATION_HOURS)
-    - Frontend stores token securely (httpOnly cookie or secure storage)
-    """
-
-    access_token: str = Field(description="JWT Bearer token for API requests")
-    token_type: str = Field(default="Bearer", description="Token type (always Bearer)")
-    user: "UserResponse" = Field(description="Authenticated user details")
-    expires_in: Optional[int] = Field(
-        default=None,
-        description="Token expiration time in seconds"
-    )
-
-
-class UserResponse(BaseModel):
-    """API response model for user data (excludes password_hash)
-
-    Usage: Returned by login, register, and user info endpoints
-    Security: password_hash is intentionally excluded from this model
-    """
-
-    id: UUID = Field(description="User ID")
-    email: str = Field(description="User email address")
-    created_at: datetime = Field(description="Account creation timestamp")
-    updated_at: Optional[datetime] = Field(
-        default=None,
-        description="Last update timestamp"
-    )

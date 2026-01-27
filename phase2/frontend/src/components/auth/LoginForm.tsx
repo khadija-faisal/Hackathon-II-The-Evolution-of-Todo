@@ -68,10 +68,7 @@ export default function LoginForm() {
       router.push("/dashboard")
     } catch (err: any) {
       // Handle login errors
-      const errorMessage =
-        err?.response?.status === 401
-          ? "Invalid email or password"
-          : err?.message || "Failed to sign in. Please try again."
+      const errorMessage = err?.message || "Failed to sign in. Please try again."
 
       setError(errorMessage)
       setIsLoading(false)

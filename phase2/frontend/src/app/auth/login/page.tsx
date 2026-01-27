@@ -2,29 +2,19 @@
 // [From]: plan.md §4.2: Better Auth Integration, tasks.md §T-035
 // [Reference]: Constitution §III (Server Components by default), FR-001 (Login)
 
-import { redirect } from "next/navigation"
-import { cookies } from "next/headers"
 import LoginForm from "@/components/auth/LoginForm"
 
 /**
- * Login Page - Server Component
+ * Login Page - Client Component (Route Handler compatible)
  *
- * Checks authentication status and renders login form:
- * - If already authenticated → redirect to /dashboard
- * - If not authenticated → render LoginForm
+ * Renders login form.
+ * Client-side authentication check is handled in middleware.ts
  *
  * Constitution Compliance:
- * - Principle III: Server Component by default (data fetching, auth checks)
+ * - Principle III: Server Component with client auth handling
  * - Principle I: Integrates with JWT Bridge Pattern
  */
-export default async function LoginPage() {
-  const cookieStore = await cookies()
-  const token = cookieStore.get("auth_token")?.value
-
-  // Redirect authenticated users to dashboard
-  if (token) {
-    redirect("/dashboard")
-  }
+export default function LoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12">
