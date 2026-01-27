@@ -52,39 +52,59 @@ export default function LogoutButton() {
 
       {/* Confirmation Modal */}
       {showConfirm && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="logout-modal-title"
-        >
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-lg">
-            <h2 id="logout-modal-title" className="text-lg font-semibold text-gray-900 mb-2">
-              Log out?
+        <>
+          {/* Backdrop - Very Dark and Complete Coverage */}
+          <div
+            className="fixed inset-0 bg-black/98 z-[9998]"
+            onClick={() => !isLoading && setShowConfirm(false)}
+          ></div>
+
+          {/* Modal Container */}
+          <div
+            className="fixed inset-0 flex items-center justify-center z-[9999] opacity-100"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="logout-modal-title"
+            onClick={() => !isLoading && setShowConfirm(false)}
+            style={{ pointerEvents: "none" }}
+          >
+            {/* Modal Content - Click propagation stopped */}
+            <div
+              className="bg-slate-800 border-2 border-red-500/60 rounded-lg p-8 max-w-md w-full mx-4 shadow-2xl shadow-red-600/50 backdrop-blur-xl ring-1 ring-red-500/20 opacity-100"
+              onClick={(e) => {
+                e.stopPropagation()
+                e.currentTarget.style.pointerEvents = "auto"
+              }}
+              style={{ pointerEvents: "auto" }}
+            >
+            <h2 id="logout-modal-title" className="text-2xl font-bold text-red-400 mb-4 flex items-center gap-3">
+              <span className="text-3xl">🚪</span> Log Out?
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-300 mb-6">
               Are you sure you want to log out? You'll need to sign in again to access your tasks.
             </p>
 
             {/* Modal Actions */}
-            <div className="flex gap-3 justify-end">
+            <div className="flex gap-3 justify-end mt-8">
               <button
                 onClick={() => setShowConfirm(false)}
                 disabled={isLoading}
-                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+                className="rounded-md border-2 border-gray-500 px-5 py-2 text-sm font-semibold text-gray-300 hover:bg-gray-700 hover:border-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-slate-800"
               >
                 Cancel
               </button>
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
+                className="rounded-md bg-red-600 hover:bg-red-700 px-5 py-2 text-sm font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-red-500/60 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800"
               >
-                {isLoading ? "Logging out..." : "Log out"}
+                {isLoading && <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>}
+                {isLoading ? "Logging out..." : "🚪 Log out"}
               </button>
             </div>
           </div>
-        </div>
+          </div>
+        </>
       )}
     </>
   )

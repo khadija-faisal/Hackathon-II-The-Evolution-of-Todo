@@ -10,7 +10,7 @@ import { cookies } from "next/headers"
  *
  * Server Component that redirects based on authentication status:
  * - Authenticated users → /dashboard
- * - Unauthenticated users → /auth/login
+ * - Unauthenticated users → /welcome (landing page)
  *
  * This prevents direct access to the home page and ensures proper routing
  *
@@ -25,6 +25,6 @@ export default async function HomePage() {
   if (token) {
     redirect("/dashboard")
   } else {
-    redirect("/auth/login")
+    redirect("/welcome")
   }
 }

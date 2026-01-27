@@ -7,6 +7,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { apiPatch, apiDelete } from "@/lib/api"
+import { useTaskModal } from "@/context/TaskModalContext"
 import type { TaskResponse } from "@/lib/types"
 import Link from "next/link"
 
@@ -35,10 +36,13 @@ interface TaskCardProps {
  */
 export default function TaskCard({ task }: TaskCardProps) {
   const [completed, setCompleted] = useState(task.completed)
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
   const [isDeleting, setIsDeleting] = useState(false)
   const [isTogglingCompletion, setIsTogglingCompletion] = useState(false)
   const router = useRouter()
+  const { openDeleteTaskId, setOpenDeleteTaskId } = useTaskModal()
+
+  // Check if this task's modal is open
+  const showDeleteConfirm = openDeleteTaskId === task.id
 
   /**
    * T-046: Handle checkbox toggle
@@ -75,19 +79,25 @@ export default function TaskCard({ task }: TaskCardProps) {
 
     try {
       await apiDelete(`/api/v1/tasks/${task.id}`)
-      // Refresh the page to update task list
-      router.refresh()
-    } catch (error) {
-      alert("Failed to delete task. Please try again.")
+      // Task deleted successfully
+      setOpenDeleteTaskId(null) // Close modal globally
+      // Refresh the dashboard to update task list
+      // Small delay to ensure delete is processed
+      setTimeout(() => {
+        router.refresh()
+      }, 300)
+    } catch (error: any) {
+      console.error("Delete error:", error)
       setIsDeleting(false)
-      setShowDeleteConfirm(false)
+      // Don't close modal on error - let user try again
+      // Error will be shown but modal stays open
     }
   }
 
   return (
     <>
       {/* Task Card (T-048: Tailwind Styling) */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4 hover:shadow-md transition-shadow">
+      <div className="group rounded-lg border border-blue-500/20 bg-slate-800 p-5 hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 hover:-translate-y-1">
         <div className="flex items-start gap-4">
           {/* T-046: Checkbox for completion toggle */}
           <input
@@ -95,7 +105,7 @@ export default function TaskCard({ task }: TaskCardProps) {
             checked={completed}
             onChange={handleToggleCompletion}
             disabled={isTogglingCompletion}
-            className="mt-1 h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="mt-1 h-5 w-5 rounded border-blue-400 bg-slate-700 text-blue-500 focus:ring-blue-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             aria-label={`Mark "${task.title}" as ${completed ? "incomplete" : "complete"}`}
           />
 
@@ -103,8 +113,10 @@ export default function TaskCard({ task }: TaskCardProps) {
           <div className="flex-1 min-w-0">
             {/* Title */}
             <h3
-              className={`text-base font-semibold break-words ${
-                completed ? "line-through text-gray-500" : "text-gray-900"
+              className={`text-base font-semibold break-words transition duration-300 ${
+                completed
+                  ? "line-through text-gray-500 group-hover:text-gray-600"
+                  : "text-white group-hover:text-blue-200"
               }`}
             >
               {task.title}
@@ -112,78 +124,119 @@ export default function TaskCard({ task }: TaskCardProps) {
 
             {/* Description */}
             {task.description && (
-              <p className="mt-2 text-sm text-gray-600 break-words">
+              <p className="mt-2 text-sm text-gray-400 break-words group-hover:text-gray-300 transition duration-300">
                 {task.description}
               </p>
             )}
 
             {/* Metadata */}
-            <p className="mt-2 text-xs text-gray-500">
-              Created {new Date(task.created_at).toLocaleDateString()}
+            <p className="mt-2 text-xs text-gray-500 group-hover:text-gray-400 transition duration-300">
+              📅 {new Date(task.created_at).toLocaleDateString()}
             </p>
           </div>
 
           {/* Action Buttons (T-050: Accessibility) */}
-          <div className="flex flex-shrink-0 gap-2">
+          <div className="flex flex-shrink-0 gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {/* Edit Button */}
             <Link
               href={`/dashboard/tasks/${task.id}/edit`}
-              className="rounded-md border border-gray-300 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+              className="rounded-md border border-blue-500/50 px-3 py-1 text-sm font-medium text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 hover:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 transition-all duration-200"
               aria-label={`Edit task: ${task.title}`}
             >
-              Edit
+              ✏️ Edit
             </Link>
 
             {/* Delete Button */}
             <button
-              onClick={() => setShowDeleteConfirm(true)}
-              disabled={isDeleting}
-              className="rounded-md border border-red-300 px-3 py-1 text-sm font-medium text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              onClick={() => setOpenDeleteTaskId(task.id)}
+              disabled={isDeleting || openDeleteTaskId !== null}
+              className="rounded-md border border-red-500/50 px-3 py-1 text-sm font-medium text-red-400 bg-red-500/10 hover:bg-red-500/20 hover:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               aria-label={`Delete task: ${task.title}`}
             >
-              Delete
+              🗑️ Delete
             </button>
           </div>
         </div>
       </div>
 
-      {/* T-047: Delete Confirmation Modal */}
+      {/* T-047: Delete Confirmation Modal - Rendered at document root */}
       {showDeleteConfirm && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="delete-modal-title"
-        >
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-lg">
-            <h2 id="delete-modal-title" className="text-lg font-semibold text-gray-900 mb-2">
-              Delete task?
+        <>
+          {/* Backdrop - Very Dark and Complete Coverage */}
+          <div
+            className="fixed inset-0 bg-black/98 z-[9998] animate-fadeIn"
+            onClick={() => !isDeleting && setOpenDeleteTaskId(null)}
+          ></div>
+
+          {/* Modal Container */}
+          <div
+            className="fixed inset-0 flex items-center justify-center z-[9999] animate-fadeIn opacity-100"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="delete-modal-title"
+            onClick={() => !isDeleting && setOpenDeleteTaskId(null)}
+            style={{ pointerEvents: "none" }}
+          >
+            {/* Modal Content - Click propagation stopped */}
+            <div
+              className="bg-slate-800 border-2 border-red-500/60 rounded-lg p-8 max-w-md w-full mx-4 shadow-2xl shadow-red-600/50 backdrop-blur-xl ring-1 ring-red-500/20 opacity-100"
+              onClick={(e) => {
+                e.stopPropagation()
+                e.currentTarget.style.pointerEvents = "auto"
+              }}
+              style={{ pointerEvents: "auto" }}
+            >
+            <h2 id="delete-modal-title" className="text-2xl font-bold text-red-400 mb-4 flex items-center gap-3">
+              <span className="text-3xl">🗑️</span> Delete Task?
             </h2>
-            <p className="text-gray-600 mb-6">
-              Are you sure you want to delete &quot;{task.title}&quot;? This action cannot be
-              undone.
+            <p className="text-gray-300 mb-2 font-semibold">
+              Are you sure you want to delete:
+            </p>
+            <p className="text-white mb-6 font-mono text-sm bg-slate-700/50 p-3 rounded border-l-4 border-red-500">
+              &quot;{task.title}&quot;
+            </p>
+            <p className="text-red-300 text-sm mb-6 flex items-center gap-2">
+              <span>⚠️</span> This action cannot be undone
             </p>
 
             {/* Modal Actions */}
-            <div className="flex gap-3 justify-end">
+            <div className="flex gap-3 justify-end mt-8">
               <button
-                onClick={() => setShowDeleteConfirm(false)}
+                onClick={() => setOpenDeleteTaskId(null)}
                 disabled={isDeleting}
-                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="rounded-md border-2 border-gray-500 px-5 py-2 text-sm font-semibold text-gray-300 hover:bg-gray-700 hover:border-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-slate-800"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
                 disabled={isDeleting}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="rounded-md bg-red-600 hover:bg-red-700 px-5 py-2 text-sm font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-red-500/60 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800"
               >
-                {isDeleting ? "Deleting..." : "Delete"}
+                {isDeleting && <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>}
+                {isDeleting ? "Deleting..." : "🗑️ Delete"}
               </button>
             </div>
           </div>
-        </div>
+          </div>
+        </>
       )}
+
+      {/* Animations */}
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.2s ease-out;
+        }
+      `}</style>
     </>
   )
 }

@@ -93,8 +93,9 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
           title,
           description: description || undefined,
         })
-        // Success - redirect to dashboard
+        // Success - redirect to dashboard and refresh data
         router.push("/dashboard")
+        router.refresh()
       } else {
         // T-056: Update existing task
         await apiPut(`/api/v1/tasks/${task!.id}`, {
@@ -102,8 +103,9 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
           description: description || undefined,
           completed: task!.completed,
         })
-        // Success - redirect to dashboard
+        // Success - redirect to dashboard and refresh data
         router.push("/dashboard")
+        router.refresh()
       }
     } catch (err: any) {
       const errorMessage =
@@ -130,19 +132,19 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
   return (
     <>
       {/* Form Container (T-058: Tailwind Styling) */}
-      <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
+      <div className="rounded-lg border border-blue-500/20 bg-slate-800 p-6 shadow-lg">
         {/* Header with Back Button */}
         <div className="mb-6 flex items-center gap-4">
           <button
             type="button"
             onClick={handleCancel}
             disabled={isLoading}
-            className="text-gray-600 hover:text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="text-gray-400 hover:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             aria-label="Back to dashboard"
           >
             ← Back
           </button>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-white">
             {mode === "create" ? "Create New Task" : "Edit Task"}
           </h1>
         </div>
@@ -151,7 +153,7 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
         {error && (
           <div
             role="alert"
-            className="mb-6 rounded-md bg-red-50 p-4 text-sm text-red-800 border border-red-200"
+            className="mb-6 rounded-md bg-red-500/10 p-4 text-sm text-red-400 border border-red-500/30"
             aria-live="polite"
           >
             {error}
@@ -162,8 +164,8 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
           {/* Title Input (T-054 Validation) */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-              Title <span className="text-red-600">*</span>
+            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
+              Title <span className="text-red-400">*</span>
             </label>
             <input
               id="title"
@@ -174,18 +176,18 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               disabled={isLoading}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-500"
+              className="mt-1 block w-full rounded-md border border-blue-500/20 bg-slate-700 px-3 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
               placeholder="What needs to be done?"
               aria-describedby="title-help"
             />
-            <p id="title-help" className="mt-1 text-sm text-gray-600">
+            <p id="title-help" className="mt-1 text-sm text-gray-400">
               {title.length}/255 characters
             </p>
           </div>
 
           {/* Description Textarea (T-054 Validation) */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="description" className="block text-sm font-medium text-gray-300">
               Description
             </label>
             <textarea
@@ -196,11 +198,11 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               disabled={isLoading}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:bg-gray-100 disabled:text-gray-500 resize-none"
+              className="mt-1 block w-full rounded-md border border-blue-500/20 bg-slate-700 px-3 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed resize-none"
               placeholder="Add more details (optional)"
               aria-describedby="description-help"
             />
-            <p id="description-help" className="mt-1 text-sm text-gray-600">
+            <p id="description-help" className="mt-1 text-sm text-gray-400">
               {description.length}/4000 characters
             </p>
           </div>
@@ -210,7 +212,7 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
             <button
               type="submit"
               disabled={isLoading}
-              className="rounded-md bg-blue-600 px-6 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="rounded-md bg-blue-600 px-6 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading
                 ? mode === "create"
@@ -225,7 +227,7 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               type="button"
               onClick={handleCancel}
               disabled={isLoading}
-              className="rounded-md border border-gray-300 px-6 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="rounded-md border border-blue-500/30 px-6 py-2 text-sm font-semibold text-gray-300 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Cancel
             </button>
@@ -236,16 +238,16 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
       {/* T-057: Discard Changes Confirmation Modal (T-059 Accessibility) */}
       {showDiscardModal && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
           role="dialog"
           aria-modal="true"
           aria-labelledby="discard-modal-title"
         >
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full mx-4 shadow-lg">
-            <h2 id="discard-modal-title" className="text-lg font-semibold text-gray-900 mb-2">
+          <div className="bg-slate-800 border border-blue-500/20 rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
+            <h2 id="discard-modal-title" className="text-lg font-semibold text-white mb-2">
               Discard unsaved changes?
             </h2>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-400 mb-6">
               Your changes will be lost if you leave without saving.
             </p>
 
@@ -253,13 +255,13 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDiscardModal(false)}
-                className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                className="rounded-md border border-blue-500/30 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 transition-colors"
               >
                 Keep editing
               </button>
               <button
                 onClick={() => router.push("/dashboard")}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
+                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800 transition-colors"
               >
                 Discard
               </button>

@@ -9,8 +9,8 @@ import jwt
 
 from backend.db import get_session
 from backend.models.user import User
-from backend.schemas.auth import LoginRequest, AuthResponse, UserResponse
-from backend.utils.password import verify_password
+from backend.schemas.auth import LoginRequest, AuthResponse, UserResponse, RegisterRequest
+from backend.utils.password import verify_password, hash_password
 from backend.config import settings
 
 # Create router for authentication endpoints
@@ -139,4 +139,87 @@ async def login(
         token_type="Bearer",
         user=user_response,
         expires_in=settings.JWT_EXPIRATION_HOURS * 3600  # Convert hours to seconds
+    )
+
+
+@router.post("/register", response_model=UserResponse, status_code=201)
+async def register(
+    request: RegisterRequest,
+    session: Session = Depends(get_session)
+) -> UserResponse:
+    """Create new user account with email and password
+
+    Endpoint: POST /api/v1/auth/register
+
+    Request:
+    {
+        "email": "newuser@example.com",
+        "password": "password123"
+    }
+
+    Success Response (201 Created):
+    {
+        "id": "uuid-string",
+        "email": "newuser@example.com",
+        "created_at": "2026-01-24T12:00:00Z",
+        "updated_at": "2026-01-24T12:00:00Z"
+    }
+
+    Error Responses:
+    - 400: Invalid request (validation failed) or email already exists
+    - 500: Server error
+
+    Security:
+    - Email uniqueness enforced by database UNIQUE constraint
+    - Password hashed using bcrypt before storage (never stored plaintext)
+    - No password returned in response
+    - Returns 400 if email already registered (IntegrityError from duplicate key)
+
+    Principle I (JWT Auth & User Isolation):
+    - New user can immediately log in with their credentials
+    - User isolation enforced at database level (UNIQUE email)
+
+    [Task]: T-029 (User registration endpoint)
+    [Reference]: FR-012 (User Registration), FR-011 (Secure password hashing)
+    """
+
+    # Validate request
+    if not request.email or not request.password:
+        raise HTTPException(
+            status_code=400,
+            detail="Email and password are required"
+        )
+
+    # Check if email already exists (case-insensitive)
+    statement = select(User).where(User.email == request.email.lower())
+    existing_user = session.exec(statement).first()
+
+    if existing_user:
+        raise HTTPException(
+            status_code=400,
+            detail="Email already registered"
+        )
+
+    # Hash password using bcrypt
+    password_hash = hash_password(request.password)
+
+    # Create new user
+    new_user = User(
+        email=request.email.lower(),
+        password_hash=password_hash,
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow()
+    )
+
+    # Save user to database
+    session.add(new_user)
+    session.commit()
+    session.refresh(new_user)
+
+    # Return user data (no password_hash)
+    return UserResponse(
+        id=new_user.id,
+        email=new_user.email,
+        created_at=new_user.created_at,
+        updated_at=new_user.updated_at
     )

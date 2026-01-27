@@ -31,15 +31,35 @@ export default async function DashboardPage() {
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-slate-900">
       {/* Header with logout */}
       <Header totalTasks={data.total} />
 
       {/* Main content */}
-      <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Task List */}
-        <TaskList tasks={data.data} />
+      <main className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        {/* Task List Container */}
+        <div className="animate-fadeIn">
+          <TaskList tasks={data.data} />
+        </div>
       </main>
+
+      {/* Animated Background */}
+      <style>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out;
+        }
+      `}</style>
     </div>
   )
 }

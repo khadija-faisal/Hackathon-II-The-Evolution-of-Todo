@@ -35,7 +35,7 @@ export default async function EditTaskPage({
     const task = await apiGet<TaskResponse>(`/api/v1/tasks/${id}`)
 
     return (
-      <main className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <main className="min-h-screen bg-slate-900 py-8 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl">
           <TaskForm mode="edit" task={task} />
         </div>
