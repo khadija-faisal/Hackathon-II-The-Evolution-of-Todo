@@ -7,6 +7,8 @@ import type { TaskListResponse } from "@/lib/types"
 import DashboardLayout from "@/components/dashboard/DashboardLayout"
 import TaskList from "@/components/tasks/TaskList"
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const data = await apiGet<TaskListResponse>(
     "/api/v1/tasks?limit=100&offset=0"
