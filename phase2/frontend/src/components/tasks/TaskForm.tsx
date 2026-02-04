@@ -131,29 +131,29 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
 
   return (
     <>
-      {/* Form Container (T-058: Tailwind Styling) */}
-      <div className="rounded-lg border border-blue-500/20 bg-slate-800 p-6 shadow-lg">
+      {/* Form Container */}
+      <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
         {/* Header with Back Button */}
-        <div className="mb-6 flex items-center gap-4">
+        <div className="mb-8 flex items-center gap-4">
           <button
             type="button"
             onClick={handleCancel}
             disabled={isLoading}
-            className="text-gray-400 hover:text-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="text-gray-600 hover:text-[#1A1A1A] disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-2xl"
             aria-label="Back to dashboard"
           >
             ← Back
           </button>
-          <h1 className="text-2xl font-bold text-white">
+          <h1 className="text-4xl font-black text-[#1A1A1A]">
             {mode === "create" ? "Create New Task" : "Edit Task"}
           </h1>
         </div>
 
-        {/* Error Message (T-054 Validation) */}
+        {/* Error Message */}
         {error && (
           <div
             role="alert"
-            className="mb-6 rounded-md bg-red-500/10 p-4 text-sm text-red-400 border border-red-500/30"
+            className="mb-6 rounded-lg bg-red-50 p-4 text-sm text-red-800 border border-red-200"
             aria-live="polite"
           >
             {error}
@@ -162,10 +162,10 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-          {/* Title Input (T-054 Validation) */}
+          {/* Title Input */}
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
-              Title <span className="text-red-400">*</span>
+            <label htmlFor="title" className="block text-sm font-bold text-[#1A1A1A] mb-2">
+              Title <span className="text-red-600">*</span>
             </label>
             <input
               id="title"
@@ -176,18 +176,18 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               disabled={isLoading}
-              className="mt-1 block w-full rounded-md border border-blue-500/20 bg-slate-700 px-3 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="mt-1 block w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-[#1A1A1A] placeholder-gray-500 focus:border-[#F3A03F] focus:outline-none focus:ring-2 focus:ring-[#F3A03F]/20 disabled:opacity-50 disabled:cursor-not-allowed transition"
               placeholder="What needs to be done?"
               aria-describedby="title-help"
             />
-            <p id="title-help" className="mt-1 text-sm text-gray-400">
+            <p id="title-help" className="mt-2 text-sm text-gray-600">
               {title.length}/255 characters
             </p>
           </div>
 
-          {/* Description Textarea (T-054 Validation) */}
+          {/* Description Textarea */}
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300">
+            <label htmlFor="description" className="block text-sm font-bold text-[#1A1A1A] mb-2">
               Description
             </label>
             <textarea
@@ -198,21 +198,21 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               disabled={isLoading}
-              className="mt-1 block w-full rounded-md border border-blue-500/20 bg-slate-700 px-3 py-2 text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed resize-none"
+              className="mt-1 block w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-[#1A1A1A] placeholder-gray-500 focus:border-[#F3A03F] focus:outline-none focus:ring-2 focus:ring-[#F3A03F]/20 disabled:opacity-50 disabled:cursor-not-allowed transition resize-none"
               placeholder="Add more details (optional)"
               aria-describedby="description-help"
             />
-            <p id="description-help" className="mt-1 text-sm text-gray-400">
+            <p id="description-help" className="mt-2 text-sm text-gray-600">
               {description.length}/4000 characters
             </p>
           </div>
 
           {/* Form Actions */}
-          <div className="flex gap-4 pt-4">
+          <div className="flex gap-4 pt-6 border-t border-gray-200">
             <button
               type="submit"
               disabled={isLoading}
-              className="rounded-md bg-blue-600 px-6 py-2 text-sm font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="rounded-lg bg-[#F3A03F] px-8 py-3 text-sm font-bold text-white hover:bg-[#E08F2C] focus:outline-none focus:ring-2 focus:ring-[#F3A03F]/50 disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               {isLoading
                 ? mode === "create"
@@ -227,7 +227,7 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
               type="button"
               onClick={handleCancel}
               disabled={isLoading}
-              className="rounded-md border border-blue-500/30 px-6 py-2 text-sm font-semibold text-gray-300 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="rounded-lg border-2 border-gray-300 px-8 py-3 text-sm font-bold text-[#1A1A1A] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300/50 disabled:opacity-50 disabled:cursor-not-allowed transition"
             >
               Cancel
             </button>
@@ -235,19 +235,19 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
         </form>
       </div>
 
-      {/* T-057: Discard Changes Confirmation Modal (T-059 Accessibility) */}
+      {/* Discard Changes Confirmation Modal */}
       {showDiscardModal && (
         <div
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50"
           role="dialog"
           aria-modal="true"
           aria-labelledby="discard-modal-title"
         >
-          <div className="bg-slate-800 border border-blue-500/20 rounded-lg p-6 max-w-sm w-full mx-4 shadow-xl">
-            <h2 id="discard-modal-title" className="text-lg font-semibold text-white mb-2">
+          <div className="bg-white border-2 border-gray-200 rounded-2xl p-8 max-w-sm w-full mx-4 shadow-2xl">
+            <h2 id="discard-modal-title" className="text-2xl font-black text-[#1A1A1A] mb-4">
               Discard unsaved changes?
             </h2>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-700 mb-6">
               Your changes will be lost if you leave without saving.
             </p>
 
@@ -255,13 +255,13 @@ export default function TaskForm({ mode, task }: TaskFormProps) {
             <div className="flex gap-3 justify-end">
               <button
                 onClick={() => setShowDiscardModal(false)}
-                className="rounded-md border border-blue-500/30 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-slate-800 transition-colors"
+                className="rounded-lg border-2 border-gray-300 px-6 py-2 text-sm font-bold text-[#1A1A1A] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-300/50 transition"
               >
                 Keep editing
               </button>
               <button
                 onClick={() => router.push("/dashboard")}
-                className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800 transition-colors"
+                className="rounded-lg bg-red-600 px-6 py-2 text-sm font-bold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition"
               >
                 Discard
               </button>
