@@ -5,6 +5,7 @@
 "use client"
 
 import LoginForm from "@/components/auth/LoginForm"
+import Footer from "@/components/shared/Footer"
 import Link from "next/link"
 
 export default function LoginPage() {
@@ -25,7 +26,7 @@ export default function LoginPage() {
       {/* Header */}
       <header className="relative z-10 border-b border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-6">
-          <Link href="/" className="text-2xl font-black text-[#1A1A1A]">
+          <Link href="/" className="text-2xl font-black text-[#1A1A1A] hover:text-[#F3A03F] transition">
             Tasktrox
           </Link>
         </div>
@@ -57,6 +58,9 @@ export default function LoginPage() {
           </div>
         </div>
       </main>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

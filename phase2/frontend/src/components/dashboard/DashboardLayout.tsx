@@ -6,6 +6,8 @@
 
 import Link from "next/link"
 import LogoutButton from "@/components/shared/LogoutButton"
+import Navbar from "./Navbar"
+import Footer from "@/components/shared/Footer"
 import { ReactNode, useState, useEffect } from "react"
 
 interface DashboardLayoutProps {
@@ -53,9 +55,10 @@ export default function DashboardLayout({ children, totalTasks }: DashboardLayou
         {/* Logo */}
         <div className="p-4 sm:p-6 border-b border-gray-200">
           <Link
-            href="/dashboard"
-            className="text-xl sm:text-2xl font-black text-[#1A1A1A] block"
+            href="/"
+            className="text-xl sm:text-2xl font-black text-[#1A1A1A] hover:text-[#F3A03F] transition block"
             onClick={() => isMobile && setSidebarOpen(false)}
+            title="Go to home page"
           >
             Tasktrox
           </Link>
@@ -140,39 +143,16 @@ export default function DashboardLayout({ children, totalTasks }: DashboardLayou
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Header */}
-        <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 h-16 flex items-center justify-between px-4 sm:px-8 z-30 flex-shrink-0">
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="md:hidden text-[#1A1A1A] hover:text-[#F3A03F] transition text-2xl"
-            aria-label="Toggle sidebar"
-          >
-            ☰
-          </button>
+        {/* Navbar */}
+        <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
 
-          {/* Welcome Message */}
+        {/* Content Area with Footer */}
+        <div className="flex-1 overflow-y-auto flex flex-col">
           <div className="flex-1">
-            <p className="text-xs sm:text-sm text-gray-600">
-              Welcome back! 👋
-            </p>
+            {children}
           </div>
-
-          {/* Date */}
-          <div className="text-right">
-            <p className="text-xs sm:text-sm font-semibold text-[#1A1A1A]">
-              {new Date().toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric'
-              })}
-            </p>
-          </div>
-        </header>
-
-        {/* Content Area */}
-        <div className="flex-1 overflow-y-auto">
-          {children}
+          {/* Footer */}
+          <Footer />
         </div>
       </div>
     </div>

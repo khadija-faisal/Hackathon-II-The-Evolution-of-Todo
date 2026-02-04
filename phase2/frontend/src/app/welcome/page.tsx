@@ -2,6 +2,7 @@
 "use client"
 
 import Link from "next/link"
+import Footer from "@/components/shared/Footer"
 import { motion } from "framer-motion"
 import { useState } from "react"
 
@@ -271,13 +272,8 @@ export default function WelcomePage() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-gray-200 py-12 bg-white">
-          <div className="max-w-7xl mx-auto px-6 text-center text-gray-600">
-            <p className="mb-2">© 2026 Tasktrox. All rights reserved.</p>
-            <p className="text-sm">Built for teams. Powered by Next.js & FastAPI.</p>
-          </div>
-        </footer>
+        {/* Footer Component */}
+        <Footer />
       </main>
     </div>
   )
