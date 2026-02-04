@@ -70,8 +70,9 @@ export default function DashboardLayout({ children, totalTasks }: DashboardLayou
             href="/dashboard"
             className="flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg bg-[#F3A03F]/10 text-[#F3A03F] font-semibold border border-[#F3A03F]/30 text-sm sm:text-base transition"
             onClick={() => isMobile && setSidebarOpen(false)}
+            title="Dashboard"
           >
-            <span className="text-lg sm:text-xl">📋</span>
+            <span className="text-lg sm:text-xl font-bold">▦</span>
             <span className="hidden sm:inline">Dashboard</span>
             <span className="sm:hidden">Dashboard</span>
           </Link>
@@ -80,8 +81,9 @@ export default function DashboardLayout({ children, totalTasks }: DashboardLayou
             href="/dashboard/tasks/new"
             className="flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-[#1A1A1A] hover:bg-gray-50 transition text-sm sm:text-base"
             onClick={() => isMobile && setSidebarOpen(false)}
+            title="Create new task"
           >
-            <span className="text-lg sm:text-xl">➕</span>
+            <span className="text-lg sm:text-xl font-bold">+</span>
             <span>New Task</span>
           </Link>
 
@@ -93,24 +95,27 @@ export default function DashboardLayout({ children, totalTasks }: DashboardLayou
               disabled
               className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-[#1A1A1A] hover:bg-gray-50 transition text-sm sm:text-base"
               onClick={() => isMobile && setSidebarOpen(false)}
+              title="High priority tasks"
             >
-              <span className="text-lg">⚡</span>
+              <span className="text-lg font-bold">▲</span>
               <span className="text-xs sm:text-sm">High Priority</span>
             </button>
             <button
               disabled
               className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-[#1A1A1A] hover:bg-gray-50 transition text-sm sm:text-base"
               onClick={() => isMobile && setSidebarOpen(false)}
+              title="Team tasks"
             >
-              <span className="text-lg">👥</span>
+              <span className="text-lg font-bold">◆</span>
               <span className="text-xs sm:text-sm">Team Tasks</span>
             </button>
             <button
               disabled
               className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-[#1A1A1A] hover:bg-gray-50 transition text-sm sm:text-base"
               onClick={() => isMobile && setSidebarOpen(false)}
+              title="Completed tasks"
             >
-              <span className="text-lg">✅</span>
+              <span className="text-lg font-bold">✓</span>
               <span className="text-xs sm:text-sm">Completed</span>
             </button>
           </div>

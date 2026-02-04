@@ -15,7 +15,7 @@ export default function Footer() {
             {/* Brand Section */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl">🚀</span>
+                <span className="text-2xl font-black text-[#F3A03F]">▲</span>
                 <h3 className="text-lg font-black text-[#1A1A1A]">Tasktrox</h3>
               </div>
               <p className="text-xs sm:text-sm text-gray-600 mb-4">
@@ -24,24 +24,27 @@ export default function Footer() {
               <div className="flex gap-3">
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-[#F3A03F]/10 text-[#F3A03F] hover:bg-[#F3A03F]/20 flex items-center justify-center transition text-sm"
+                  className="w-8 h-8 rounded-full bg-[#F3A03F]/10 text-[#F3A03F] hover:bg-[#F3A03F]/20 flex items-center justify-center transition text-xs font-bold"
                   aria-label="Twitter"
+                  title="Twitter"
                 >
                   𝕏
                 </a>
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-[#8E7CFF]/10 text-[#8E7CFF] hover:bg-[#8E7CFF]/20 flex items-center justify-center transition text-sm"
+                  className="w-8 h-8 rounded-full bg-[#8E7CFF]/10 text-[#8E7CFF] hover:bg-[#8E7CFF]/20 flex items-center justify-center transition text-base font-bold"
                   aria-label="GitHub"
+                  title="GitHub"
                 >
-                  🐙
+                  ◆
                 </a>
                 <a
                   href="#"
-                  className="w-8 h-8 rounded-full bg-[#F3A03F]/10 text-[#F3A03F] hover:bg-[#F3A03F]/20 flex items-center justify-center transition text-sm"
+                  className="w-8 h-8 rounded-full bg-[#F3A03F]/10 text-[#F3A03F] hover:bg-[#F3A03F]/20 flex items-center justify-center transition text-base font-bold"
                   aria-label="LinkedIn"
+                  title="LinkedIn"
                 >
-                  💼
+                  ◈
                 </a>
               </div>
             </div>

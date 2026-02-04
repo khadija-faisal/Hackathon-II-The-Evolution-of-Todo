@@ -45,61 +45,61 @@ export default function LogoutButton() {
       <button
         onClick={() => setShowConfirm(true)}
         disabled={isLoading}
-        className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-lg border-2 border-gray-300 px-4 py-2 text-xs sm:text-sm font-bold text-[#1A1A1A] hover:bg-gray-50 hover:border-[#F3A03F]/30 focus:outline-none focus:ring-2 focus:ring-[#F3A03F]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
       >
-        {isLoading ? "Logging out..." : "Log out"}
+        {isLoading ? "Logging out..." : "Sign Out"}
       </button>
 
       {/* Confirmation Modal */}
       {showConfirm && (
         <>
-          {/* Backdrop - Very Dark and Complete Coverage */}
+          {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/98 z-[9998]"
+            className="fixed inset-0 bg-black/50 z-[9998]"
             onClick={() => !isLoading && setShowConfirm(false)}
           ></div>
 
           {/* Modal Container */}
           <div
-            className="fixed inset-0 flex items-center justify-center z-[9999] opacity-100"
+            className="fixed inset-0 flex items-center justify-center z-[9999] p-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby="logout-modal-title"
             onClick={() => !isLoading && setShowConfirm(false)}
             style={{ pointerEvents: "none" }}
           >
-            {/* Modal Content - Click propagation stopped */}
+            {/* Modal Content */}
             <div
-              className="bg-slate-800 border-2 border-red-500/60 rounded-lg p-8 max-w-md w-full mx-4 shadow-2xl shadow-red-600/50 backdrop-blur-xl ring-1 ring-red-500/20 opacity-100"
+              className="bg-white border-2 border-gray-200 rounded-lg sm:rounded-2xl p-6 sm:p-8 max-w-md w-full shadow-lg"
               onClick={(e) => {
                 e.stopPropagation()
                 e.currentTarget.style.pointerEvents = "auto"
               }}
               style={{ pointerEvents: "auto" }}
             >
-            <h2 id="logout-modal-title" className="text-2xl font-bold text-red-400 mb-4 flex items-center gap-3">
-              <span className="text-3xl">🚪</span> Log Out?
+            <h2 id="logout-modal-title" className="text-xl sm:text-2xl font-black text-[#1A1A1A] mb-3 sm:mb-4">
+              Sign Out?
             </h2>
-            <p className="text-gray-300 mb-6">
-              Are you sure you want to log out? You'll need to sign in again to access your tasks.
+            <p className="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
+              Are you sure you want to sign out? You'll need to sign in again to access your tasks.
             </p>
 
             {/* Modal Actions */}
-            <div className="flex gap-3 justify-end mt-8">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
               <button
                 onClick={() => setShowConfirm(false)}
                 disabled={isLoading}
-                className="rounded-md border-2 border-gray-500 px-5 py-2 text-sm font-semibold text-gray-300 hover:bg-gray-700 hover:border-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-slate-800"
+                className="rounded-lg border-2 border-gray-300 px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold text-[#1A1A1A] hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-2 focus:ring-gray-300/50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleLogout}
                 disabled={isLoading}
-                className="rounded-md bg-red-600 hover:bg-red-700 px-5 py-2 text-sm font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-red-500/60 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-slate-800"
+                className="rounded-lg bg-red-600 hover:bg-red-700 px-4 sm:px-6 py-2 text-xs sm:text-sm font-bold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500/50"
               >
                 {isLoading && <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>}
-                {isLoading ? "Logging out..." : "🚪 Log out"}
+                {isLoading ? "Signing out..." : "Sign Out"}
               </button>
             </div>
           </div>

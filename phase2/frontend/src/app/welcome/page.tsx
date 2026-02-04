@@ -166,7 +166,7 @@ export default function WelcomePage() {
                     : "border-gray-200 bg-white"
                 }`}
               >
-                <div className="text-4xl mb-4">⚡</div>
+                <div className="text-4xl mb-4 font-bold text-[#F3A03F]">▲</div>
                 <h3 className="text-xl font-bold text-[#1A1A1A] mb-3">
                   Smart Task Prioritization
                 </h3>
@@ -174,9 +174,9 @@ export default function WelcomePage() {
                   Automatically rank tasks by urgency, deadline, and team dependencies. Stay focused on what matters most.
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>✓ AI-powered prioritization</li>
-                  <li>✓ Deadline tracking</li>
-                  <li>✓ Dependency mapping</li>
+                  <li className="flex items-center gap-2"><span className="text-[#F3A03F] font-bold">✓</span> AI-powered prioritization</li>
+                  <li className="flex items-center gap-2"><span className="text-[#F3A03F] font-bold">✓</span> Deadline tracking</li>
+                  <li className="flex items-center gap-2"><span className="text-[#F3A03F] font-bold">✓</span> Dependency mapping</li>
                 </ul>
               </motion.div>
 
@@ -191,7 +191,7 @@ export default function WelcomePage() {
                     : "border-gray-200 bg-white"
                 }`}
               >
-                <div className="text-4xl mb-4">👥</div>
+                <div className="text-4xl mb-4 font-bold text-[#8E7CFF]">◆</div>
                 <h3 className="text-xl font-bold text-[#1A1A1A] mb-3">
                   Real-time Collaboration
                 </h3>
@@ -199,9 +199,9 @@ export default function WelcomePage() {
                   Invite team members, assign tasks, and see live updates. Everyone stays on the same page.
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>✓ Instant notifications</li>
-                  <li>✓ Team avatars & mentions</li>
-                  <li>✓ Activity timeline</li>
+                  <li className="flex items-center gap-2"><span className="text-[#8E7CFF] font-bold">✓</span> Instant notifications</li>
+                  <li className="flex items-center gap-2"><span className="text-[#8E7CFF] font-bold">✓</span> Team avatars & mentions</li>
+                  <li className="flex items-center gap-2"><span className="text-[#8E7CFF] font-bold">✓</span> Activity timeline</li>
                 </ul>
               </motion.div>
 
@@ -216,7 +216,7 @@ export default function WelcomePage() {
                     : "border-gray-200 bg-white"
                 }`}
               >
-                <div className="text-4xl mb-4">📊</div>
+                <div className="text-4xl mb-4 font-bold text-blue-400">◈</div>
                 <h3 className="text-xl font-bold text-[#1A1A1A] mb-3">
                   Visual Progress Tracking
                 </h3>
@@ -224,9 +224,9 @@ export default function WelcomePage() {
                   See project progress at a glance with beautiful dashboards and detailed analytics.
                 </p>
                 <ul className="text-sm text-gray-700 space-y-2">
-                  <li>✓ Real-time dashboards</li>
-                  <li>✓ Completion metrics</li>
-                  <li>✓ Team performance insights</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-400 font-bold">✓</span> Real-time dashboards</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-400 font-bold">✓</span> Completion metrics</li>
+                  <li className="flex items-center gap-2"><span className="text-blue-400 font-bold">✓</span> Team performance insights</li>
                 </ul>
               </motion.div>
             </div>
