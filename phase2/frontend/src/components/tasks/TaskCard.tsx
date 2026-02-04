@@ -61,26 +61,26 @@ export default function TaskCard({ task }: TaskCardProps) {
   return (
     <>
       {/* Task Card */}
-      <div className={`p-6 rounded-xl border-2 bg-white transition transform hover:shadow-lg ${
+      <div className={`p-3 sm:p-6 rounded-lg sm:rounded-xl border-2 bg-white transition transform hover:shadow-lg ${
         completed
           ? "border-green-200 bg-green-50/30"
           : "border-gray-200 hover:border-[#F3A03F]/50"
       }`}>
         {/* Checkbox + Title */}
-        <div className="flex items-start gap-4 mb-4">
+        <div className="flex items-start gap-2 sm:gap-4 mb-3 sm:mb-4">
           <div className="flex-shrink-0 mt-1">
             <input
               type="checkbox"
               checked={completed}
               onChange={handleToggleCompletion}
               disabled={isTogglingCompletion}
-              className="w-5 h-5 rounded border-2 border-gray-300 text-[#F3A03F] accent-[#F3A03F] focus:ring-2 focus:ring-[#F3A03F]/30 cursor-pointer disabled:opacity-50"
+              className="w-4 sm:w-5 h-4 sm:h-5 rounded border-2 border-gray-300 text-[#F3A03F] accent-[#F3A03F] focus:ring-2 focus:ring-[#F3A03F]/30 cursor-pointer disabled:opacity-50"
               aria-label={`Mark "${task.title}" as ${completed ? "incomplete" : "complete"}`}
             />
           </div>
 
           <div className="flex-1 min-w-0">
-            <h3 className={`font-bold text-lg mb-1 break-words ${
+            <h3 className={`font-bold text-sm sm:text-lg mb-1 break-words ${
               completed
                 ? "line-through text-gray-400"
                 : "text-[#1A1A1A]"
@@ -89,18 +89,18 @@ export default function TaskCard({ task }: TaskCardProps) {
             </h3>
 
             {task.description && (
-              <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2">
                 {task.description}
               </p>
             )}
 
             {/* Date Badge */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-medium">
+            <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+              <span className="text-xs bg-gray-100 text-gray-700 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-medium">
                 📅 {new Date(task.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
               </span>
               {completed && (
-                <span className="text-xs bg-green-100 text-green-700 px-3 py-1 rounded-full font-medium">
+                <span className="text-xs bg-green-100 text-green-700 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full font-medium">
                   ✓ Done
                 </span>
               )}
@@ -109,10 +109,10 @@ export default function TaskCard({ task }: TaskCardProps) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-2 pt-4 border-t border-gray-200 justify-end">
+        <div className="flex flex-col sm:flex-row gap-2 pt-2 sm:pt-4 border-t border-gray-200">
           <Link
             href={`/dashboard/tasks/${task.id}/edit`}
-            className="px-3 py-2 text-sm font-semibold text-[#8E7CFF] hover:bg-purple-50 border border-[#8E7CFF]/30 rounded-lg transition"
+            className="flex-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-[#8E7CFF] hover:bg-purple-50 border border-[#8E7CFF]/30 rounded-lg transition text-center"
             aria-label={`Edit task: ${task.title}`}
           >
             ✏️ Edit
@@ -121,7 +121,7 @@ export default function TaskCard({ task }: TaskCardProps) {
           <button
             onClick={() => setOpenDeleteTaskId(task.id)}
             disabled={isDeleting || openDeleteTaskId !== null}
-            className="px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-50 border border-red-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="flex-1 px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-red-600 hover:bg-red-50 border border-red-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition text-center"
             aria-label={`Delete task: ${task.title}`}
           >
             🗑️ Delete
@@ -138,7 +138,7 @@ export default function TaskCard({ task }: TaskCardProps) {
           ></div>
 
           <div
-            className="fixed inset-0 flex items-center justify-center z-[9999] animate-fadeIn"
+            className="fixed inset-0 flex items-center justify-center z-[9999] animate-fadeIn p-4"
             role="dialog"
             aria-modal="true"
             aria-labelledby="delete-modal-title"
@@ -146,38 +146,38 @@ export default function TaskCard({ task }: TaskCardProps) {
             style={{ pointerEvents: "none" }}
           >
             <div
-              className="bg-white rounded-xl p-8 max-w-md w-full mx-4 shadow-2xl border border-red-200"
+              className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-8 max-w-md w-full shadow-2xl border border-red-200"
               onClick={(e) => {
                 e.stopPropagation()
                 e.currentTarget.style.pointerEvents = "auto"
               }}
               style={{ pointerEvents: "auto" }}
             >
-              <h2 id="delete-modal-title" className="text-2xl font-black text-[#1A1A1A] mb-4">
+              <h2 id="delete-modal-title" className="text-lg sm:text-2xl font-black text-[#1A1A1A] mb-3 sm:mb-4">
                 Delete Task?
               </h2>
-              <p className="text-gray-700 mb-2 font-medium">
+              <p className="text-xs sm:text-sm text-gray-700 mb-2 font-medium">
                 Are you sure you want to delete:
               </p>
-              <p className="text-[#1A1A1A] font-bold mb-6 bg-gray-100 p-3 rounded-lg border-l-4 border-[#F3A03F]">
+              <p className="text-xs sm:text-base text-[#1A1A1A] font-bold mb-4 sm:mb-6 bg-gray-100 p-2 sm:p-3 rounded-lg border-l-4 border-[#F3A03F] break-words">
                 "{task.title}"
               </p>
-              <p className="text-red-600 text-sm mb-6 font-semibold">
+              <p className="text-red-600 text-xs sm:text-sm mb-4 sm:mb-6 font-semibold">
                 ⚠️ This action cannot be undone
               </p>
 
-              <div className="flex gap-3 justify-end">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end">
                 <button
                   onClick={() => setOpenDeleteTaskId(null)}
                   disabled={isDeleting}
-                  className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 font-semibold transition"
+                  className="px-3 sm:px-4 py-2 text-xs sm:text-sm text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 font-semibold transition"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleDelete}
                   disabled={isDeleting}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 font-semibold transition flex items-center gap-2"
+                  className="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 font-semibold transition flex items-center justify-center gap-2"
                 >
                   {isDeleting && <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>}
                   {isDeleting ? "Deleting..." : "🗑️ Delete"}

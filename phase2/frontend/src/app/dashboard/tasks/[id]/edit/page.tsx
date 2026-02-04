@@ -51,7 +51,7 @@ export default async function EditTaskPage({
 
         {/* Dashboard Layout */}
         <DashboardLayout totalTasks={0}>
-          <main className="relative z-10 p-8">
+          <main className="relative z-10 p-4 sm:p-6 lg:p-8">
             <div className="max-w-2xl">
               <TaskForm mode="edit" task={task} />
             </div>

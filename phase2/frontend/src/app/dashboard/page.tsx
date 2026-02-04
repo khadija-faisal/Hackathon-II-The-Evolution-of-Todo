@@ -28,14 +28,14 @@ export default async function DashboardPage() {
 
       {/* Sidebar + Main Layout */}
       <DashboardLayout totalTasks={data.total}>
-        <main className="relative z-10 p-8">
+        <main className="relative z-10 p-4 sm:p-6 lg:p-8">
           <div className="max-w-6xl">
             {/* Page Header */}
-            <div className="mb-8">
-              <h1 className="text-4xl font-black text-[#1A1A1A] mb-2">
+            <div className="mb-6 sm:mb-8">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#1A1A1A] mb-1 sm:mb-2">
                 Your Tasks
               </h1>
-              <p className="text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600">
                 {data.total} task{data.total !== 1 ? 's' : ''} in progress
               </p>
             </div>
