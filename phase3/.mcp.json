@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+      "spec-kit": {
+        "command": "/home/khadija/hackthon2/phase2/.venv/bin/python3",
+        "args": ["/home/khadija/hackthon2/phase2/mcp_server.py"],
+        "env": {}
+      }
+    }
+  }

@@ -1,0 +1,21 @@
+[project]
+name = "backend"
+version = "1.0.0"
+description = "Todo App Phase 2 + Phase 3 - Backend API with MCP Tools & AI Chatbot"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Phase 2 Dependencies (REST API)
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.31.0",
+    "sqlmodel>=0.0.16",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.6.0",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    "bcrypt>=4.1.2",
+    "python-multipart>=0.0.6",
+    # Phase 3 Dependencies (MCP Tools & Agent)
+    "openai>=1.3.0",
+    "mcp>=0.1.0",
+]
