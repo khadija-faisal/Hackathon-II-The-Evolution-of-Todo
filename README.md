@@ -84,11 +84,11 @@ npm run dev
 # Visit http://localhost:3000
 ```
 
-**Status**: In Progress | **Stack**: Next.js + FastAPI + PostgreSQL
+**Status**: Completed | **Stack**: Next.js + FastAPI + PostgreSQL
 
 ---
 
-## Phase 3: AI-Powered Chatbot 🚀 PLANNED
+## Phase 3: AI-Powered Chatbot 🚀 OnGOING
 
 **Objective**: Add conversational interface using OpenAI Agents & MCP tools.
 
@@ -103,11 +103,11 @@ npm run dev
 - MCP Server (Official SDK)
 - FastAPI + SQLModel backend
 
-**Status**: Planned | **Points**: 200
+**Status**: 70% completed | **Points**: 200
 
 ---
 
-## Phase 4: Local Kubernetes 🔄 IN PROGRESS
+## Phase 4: Local Kubernetes  PLANNED
 
 **Objective**: Deploy chatbot locally on Minikube with containerization.
 
@@ -186,6 +186,11 @@ hackathon2/
 ├── phase2/                  # 🔄 Web Application
 │   ├── frontend/            # Next.js app
 │   ├── backend/             # FastAPI app
+│   ├── specs/
+│   └── README.md
+├── phase3/
+│   ├── frontend/            # Next.js app
+│   ├── backend/             # FastAPI, Openai Agent SDK, agent, services
 │   ├── specs/
 │   └── README.md
 │
