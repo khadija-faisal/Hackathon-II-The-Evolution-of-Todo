@@ -11,9 +11,9 @@ A modern multi-user todo application built with FastAPI (backend) and Next.js (f
 ## Status
 
 - Phase 1 (Setup): ✅ Complete
-- Phase 2 (Foundation): 🚧 In Progress
-- Phase 3 (Task CRUD): ⏳ Pending
-- Phase 4 (Frontend UI): ⏳ Pending
+- Phase 2 (Foundation): ✅ Complete
+- Phase 3 (Task CRUD): 🚧 In Progress
+- Phase 4 (Frontend UI): 🚧 In Progress
 
 ## Running
 
